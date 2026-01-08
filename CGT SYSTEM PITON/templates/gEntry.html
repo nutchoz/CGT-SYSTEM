@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gate Entry</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<body class="bg-white ">
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-gray-300 text-black  flex flex-col relative z-50">
+            <div class="mb-[100px] p-5 flex justify-center">
+                <img src="{{ url_for('static', filename='pictures/cgt.jpg') }}"
+                alt="Cavite Gateway"
+                class="h-20 object-contain">  
+            </div>
+        
+            <nav class="text-2xl font-bold">
+                <ul class="">
+                    <li>
+                        <button id="btnDashboard" type="button"
+class="nav-btn w-full py-3 bg-blue-500 text-white hover:text-black transition">
+
+                        Dashboard
+                    </button>
+                    
+                    <button id="btnGateEntry" type="button"
+class="nav-btn w-full py-3 bg-blue-500 text-white hover:text-black transition">
+
+                        Gate Entry
+                    </button>
+                    
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <header class="flex justify-end items-center pr-10 bg-gray-300 w-full h-[50px] absolute z-30 border-b border-gray-400
+        ">
+    <div class="text-lg font-bold bg-orange-200 px-2 py-1 rounded-md">USER 01</div>
+</header>
+        <!-- Main Content -->
+        <main class="flex-1 p-6 bg-gray-200 overflow-y-auto pt-20">
+    
+                <div class="flex items-center space-x-4 mb-10">
+                    <input type="text" placeholder="Search" class="p-2 border rounded  bg-gray-100">
+                    <button class="p-2 px-4 bg-green-500 text-white rounded hover:bg-green-600 transition">+</button>
+                </div>
+            
+
+            <!-- Truck Records -->
+            <section>
+                <h2 class="text-2xl font-bold mb-4">Truck Records</h2>
+                <table class="w-full border-collapse border border-gray-300">
+                    <thead>
+                        <tr class="bg-blue-500 text-white">
+                            <th class="border border-gray-300 p-2 text-left">Gate In</th>
+                            <th class="border border-gray-300 p-2 text-left">Container No.</th>
+                            <th class="border border-gray-300 p-2 text-left">Transaction NBR</th>
+                            <th class="border border-gray-300 p-2 text-left">Shipping Line</th>
+                            <th class="border border-gray-300 p-2 text-left">Booking No</th>
+                            <th class="border border-gray-300 p-2 text-left">ISO CODE</th>
+                            <th class="border border-gray-300 p-2 text-left">Category</th>
+                            <th class="border border-gray-300 p-2 text-left">Move</th>
+                            <th class="border border-gray-300 p-2 text-left">Transport Company</th>
+                            <th class="border border-gray-300 p-2 text-left">Driver’s Name</th>
+                            <th class="border border-gray-300 p-2 text-left">Plate No</th>
+                            <th class="border border-gray-300 p-2 text-left">MNR Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="record-row cursor-pointer hover:bg-gray-100"
+    data-date="01/06/2026"
+    data-transaction="TRX-00123"
+    data-shipping="Maersk"
+    data-container="BICU 123456"
+    data-booking="BK-789456"
+    data-reefer="Yes"
+    data-seal="SL-456789"
+    data-iso="22G1"
+    data-Category="S class"
+    data-license="DL-987654"
+    data-move="Import"
+    data-transport="ABC Transport"
+    data-driver="Juan Dela Cruz"
+    data-plate="DBA 1234"
+    data-creator="Admin"
+    data-gross="28000"
+    data-tare="3800"
+    data-net="24200"
+    data-entrylane="2"
+    data-exitlane="3"
+    data-mnr="Good"
+    data-damage="None"
+    data-notes="No issues"
+    data-inspector="Inspector A"
+    data-vgm="28500"
+>
+    <td class="border p-2">01/06/2026</td>
+    <td class="border p-2">BICU 123456</td>
+    <td class="border p-2">TRX-00123</td>
+    <td class="border p-2">Maersk</td>
+    <td class="border p-2">BK-789456</td>
+    <td class="border p-2">22G1</td>
+    <td class="border p-2">S CLASS</td>
+    <td class="border p-2">Import</td>
+    <td class="border p-2">ABC Transport</td>
+    <td class="border p-2">Juan Dela Cruz</td>
+    <td class="border p-2">DBA 1234</td>
+    <td class="border p-2">Good</td>
+</tr>
+
+                    </tbody>
+                </table>
+                
+            </section>
+        </main>
+    </div>
+
+    <div id="modal" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden absolute z-50">
+        <div class="bg-gray-100 p-8 rounded-lg w-full">
+            <h2 class="text-2xl font-bold mb-6 text-center">Truck Data Entry Form</h2>
+            <div class="max-h-[70vh] overflow-y-auto pr-2">
+            <div class="grid grid-cols-2 gap-4">
+
+                <!-- 1–13 (YOUR EXISTING FIELDS) -->
+                <div>
+                    <label class="block mb-2 required">Date:</label>
+                    <input type="date" class="w-full p-2 border rounded">
+                </div>
+            
+                <div>
+                    <label class="block mb-2">Transaction NBR:</label>
+                    <input type="text" class="w-full p-2 border rounded">
+                </div>
+                
+                <div>
+                    <label class="block mb-2">Shipping Line:</label>
+                    <input type="text" class="w-full p-2 border rounded">
+                </div>
+            
+                <div>
+                    <label class="block mb-2">Container No:</label>
+                    <input type="text" class="w-full p-2 border rounded">
+                </div>
+            
+                <div>
+                    <label class="block mb-2">Booking No:</label>
+                    <input type="text" class="w-full p-2 border rounded">
+                </div>
+            
+                <div>
+                    <label class="block mb-2">Reefer REQT:</label>
+                    <input type="text" class="w-full p-2 border rounded">
+                </div>
+            
+                <div>
+                    <label class="block mb-2">Seal No:</label>
+                    <input type="text" class="w-full p-2 border rounded">
+                </div>
+            
+                <div>
+                    <label class="block mb-2">ISO CODE:</label>
+                    <input type="text" class="w-full p-2 border rounded">
+                </div>
+            
+                <div>
+                    <label class="block mb-2">Truck Driver License:</label>
+                    <input type="text" class="w-full p-2 border rounded">
+                </div>
+            
+                <div>
+                    <label class="block mb-2">Move:</label>
+                    <input type="text" class="w-full p-2 border rounded">
+                </div>
+            
+                <div>
+                    <label class="block mb-2">Transport Company:</label>
+                    <input type="text" class="w-full p-2 border rounded">
+                </div>
+            
+                <div>
+                    <label class="block mb-2">Drivers Name:</label>
+                    <input type="text" class="w-full p-2 border rounded">
+                </div>
+            
+                <div>
+                    <label class="block mb-2">Plate No:</label>
+                    <input type="text" class="w-full p-2 border rounded">
+                </div>
+            
+                <!-- 14–26 (NEW FIELDS ADDED) -->
+                <div>
+                    <label class="block mb-2">Trans Creator:</label>
+                    <input type="text" class="w-full p-2 border rounded">
+                </div>
+            
+                <div>
+                    <label class="block mb-2">Gross Weight (kg):</label>
+                    <input type="text" class="w-full p-2 border rounded">
+                </div>
+            
+                <div>
+                    <label class="block mb-2">Tare Weight (kg):</label>
+                    <input type="text" class="w-full p-2 border rounded">
+                </div>
+            
+                <div>
+                    <label class="block mb-2">Net Weight (kg):</label>
+                    <input type="number" class="w-full p-2 border rounded">
+                </div>
+            
+                <div>
+                    <label class="block mb-2">Entry Lane(Optional):</label>
+                    <input type="number" class="w-full p-2 border rounded">
+                </div>
+            
+                <div>
+                    <label class="block mb-2">Exit Lane(Optional):</label>
+                    <input type="number" class="w-full p-2 border rounded">
+                </div>
+            
+                <div>
+                    <label class="block mb-2">MNR Status(Optional):</label>
+                    <input type="text" class="w-full p-2 border rounded">
+                </div>
+            
+                <div>
+                    <label class="block mb-2">Damage Code(S)(Optional):</label>
+                    <input type="text" class="w-full p-2 border rounded">
+                </div>
+            
+                <div>
+                    <label class="block mb-2">Inpection Notes(Optional):</label>
+                    <input type="text" class="w-full p-2 border rounded">
+                </div>
+            
+                <div>
+                    <label class="block mb-2">Gate Inspector(Optional):</label>
+                    <input type="text" class="w-full p-2 border rounded">
+                </div>
+            
+                
+            
+                <div>
+                    <label class="block mb-2">VGM Weight(Optional):</label>
+                    <input type="text" class="w-full p-2 border rounded">
+                </div>
+            
+            
+            </div>
+        </div>
+            <!-- Action Buttons -->
+            <div class="flex justify-end gap-3 mt-6">
+                <button
+                    type="button"
+                    id="closeModal"
+                    class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+                >
+                    Close
+                </button>
+
+                <button
+    type="button"
+    id="submitForm"
+    class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+>
+    Submit
+</button>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const buttons = document.querySelectorAll('.nav-btn');
+
+    buttons.forEach(button => {
+        button.addEventListener('click', function () {
+
+            // Remove active (orange) from all buttons
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-orange-500');
+                btn.classList.add('bg-blue-500');
+            });
+
+            // Add active (orange) to clicked button
+            this.classList.remove('bg-blue-500');
+            this.classList.add('bg-orange-500');
+        });
+    });
+
+    document.getElementById('btnDashboard').addEventListener('click', () => {
+        window.location.href = '/';
+    });
+    
+    document.getElementById('btnGateEntry').addEventListener('click', () => {
+        window.location.href = '/gate-entry';
+    });
+    
+
+//sweet alert
+    document.getElementById('submitForm').addEventListener('click', () => {
+        Swal.fire({
+            title: 'Save this record?',
+            text: 'Please confirm before saving the truck data.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, save it',
+            cancelButtonText: 'Cancel',
+            confirmButtonColor: '#22c55e',
+            cancelButtonColor: '#ef4444'
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                // ✅ SUCCESS ALERT AFTER CONFIRM
+                Swal.fire({
+                    title: 'Saved!',
+                    text: 'Truck record has been saved successfully.',
+                    icon: 'success',
+                    confirmButtonColor: '#22c55e'
+                });
+
+                // OPTIONAL: Close modal
+                document.getElementById('modal').classList.add('hidden');
+
+                // 🔜 Later: Submit to PHP / MySQL here
+            }
+        });
+    });
+
+
+    document.querySelectorAll('.record-row').forEach(row => {
+    row.addEventListener('click', () => {
+        Swal.fire({
+            title: 'Truck Record Details',
+            width: 700,
+            html: `
+                <div class="grid grid-cols-2 gap-3 text-left text-sm">
+                    <p><b>Date:</b> ${row.dataset.date}</p>
+                    <p><b>Transaction NBR:</b> ${row.dataset.transaction}</p>
+
+                    <p><b>Shipping Line:</b> ${row.dataset.shipping}</p>
+                    <p><b>Container No:</b> ${row.dataset.container}</p>
+
+                    <p><b>Booking No:</b> ${row.dataset.booking}</p>
+                    <p><b>Reefer REQT:</b> ${row.dataset.reefer}</p>
+
+                    <p><b>Seal No:</b> ${row.dataset.seal}</p>
+                    <p><b>ISO CODE:</b> ${row.dataset.iso}</p>
+                    <p><b>Category:</b> ${row.dataset.Category}</p>
+                    <p><b>Truck Driver License:</b> ${row.dataset.license}</p>
+                    <p><b>Move:</b> ${row.dataset.move}</p>
+
+                    <p><b>Transport Company:</b> ${row.dataset.transport}</p>
+                    <p><b>Driver’s Name:</b> ${row.dataset.driver}</p>
+
+                    <p><b>Plate No:</b> ${row.dataset.plate}</p>
+                    <p><b>Trans Creator:</b> ${row.dataset.creator}</p>
+
+                    <p><b>Gross Weight (kg):</b> ${row.dataset.gross}</p>
+                    <p><b>Tare Weight (kg):</b> ${row.dataset.tare}</p>
+
+                    <p><b>Net Weight (kg):</b> ${row.dataset.net}</p>
+                    <p><b>Entry Lane:</b> ${row.dataset.entrylane}</p>
+
+                    <p><b>Exit Lane:</b> ${row.dataset.exitlane}</p>
+                    <p><b>MNR Status:</b> ${row.dataset.mnr}</p>
+
+                    <p><b>Damage Code(s):</b> ${row.dataset.damage}</p>
+                    <p><b>Inspection Notes:</b> ${row.dataset.notes}</p>
+
+                    <p><b>Gate Inspector:</b> ${row.dataset.inspector}</p>
+                    <p><b>VGM Weight:</b> ${row.dataset.vgm}</p>
+                </div>
+            `,
+
+            confirmButtonText: 'Close',
+            confirmButtonColor: '#3b82f6'
+        });
+    });
+});
+
+// Add event listener to show the modal
+const showModalButton = document.querySelector('.p-2.px-4.bg-green-500'); // Assuming the green button is used to show the modal
+const modal = document.getElementById('modal');
+const closeModalButton = document.getElementById('closeModal');
+
+if (showModalButton && modal && closeModalButton) {
+    showModalButton.addEventListener('click', () => {
+        modal.classList.remove('hidden');
+    });
+
+    closeModalButton.addEventListener('click', () => {
+        modal.classList.add('hidden');
+    });
+}
+
+    </script>
+    <script src="{{ url_for('static', filename='javascript/main.js') }}"></script>
+
+</body>
+</html>

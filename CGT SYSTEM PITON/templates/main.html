@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+
+<body class="bg-gray-200">
+    <div class="flex h-screen ">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-gray-300 text-black  flex flex-col relative z-50">
+            <div class="mb-[100px] p-5 flex justify-center">
+                <img src="{{ url_for('static', filename='pictures/cgt.jpg') }}"
+                alt="Cavite Gateway"
+                class="h-20 object-contain">           
+
+            </div>
+            
+        
+            <nav class="text-2xl font-bold">
+                <ul class="">
+                    <li>
+                        <button id="btnDashboard"
+    class="nav-btn w-full py-3  bg-blue-500 text-white  hover:text-black transition">
+    Dashboard
+</button>
+
+<button id="btnGateEntry"
+    class="nav-btn w-full py-3  bg-blue-500 text-white  hover:text-black transition">
+    Gate Entry
+</button>
+
+                    
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+        
+        <header class="flex justify-end items-center pr-10 bg-gray-300 w-full h-[50px] absolute z-30 border-b border-gray-400
+        ">
+    <div class="text-lg font-bold bg-orange-200 px-2 py-1 rounded-md">USER 01</div>
+</header>
+
+        <!-- Main Content -->
+        <main class="flex-1 px-6 pb-6  pt-20 pl-30 bg-gray-200 overflow-y-auto no-scrollbar">
+            
+
+            <!-- Analytics Report -->
+            <section class="mb-6">
+                <h2 class="text-xl font-bold mb-4">Analytics Report</h2>
+                <div class="h-48 bg-teal-100 rounded flex items-center justify-center text-teal-700">[Line Chart Placeholder]</div>
+            </section>
+
+            <!-- Summary Cards -->
+            <section class="grid grid-cols-3 gap-6 mb-6">
+                <div class="p-6 bg-green-100 rounded text-center text-lg font-bold text-green-700">Total Clients: 80</div>
+                <div class="p-6 bg-green-100 rounded text-center text-lg font-bold text-green-700">---------</div>
+                <div class="p-6 bg-green-100 rounded text-center text-lg font-bold text-green-700">---------</div>
+            </section>
+
+            <!-- Recent Orders -->
+            <section class="mb-6">
+                <h2 class="text-xl font-bold mb-4">Recent Clients</h2>
+                <table class="w-full border-collapse border border-gray-300">
+                    <thead>
+                        <tr class="bg-blue-500 text-white">
+                            <th class="border border-gray-300 p-2 text-left">Driver's Name</th>
+                            <th class="border border-gray-300 p-2 text-left">Plate Number</th>
+                            <th class="border border-gray-300 p-2 text-left">Container Number</th>
+                            <th class="border border-gray-300 p-2 text-left">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="border border-gray-300 p-2">Client One</td>
+                            <td class="border border-gray-300 p-2">DBA 1234</td>
+                            <td class="border border-gray-300 p-2">BICU 123456</td>
+                            <td class="border border-gray-300 p-2">01/06/2026</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 p-2">Client Two</td>
+                            <td class="border border-gray-300 p-2">DBB 5678</td>
+                            <td class="border border-gray-300 p-2">ZEGU 123456</td>
+                            <td class="border border-gray-300 p-2">01/05/2026</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Daily Visit Insights -->
+            <section>
+                <h2 class="text-xl font-bold mb-4">Daily Visit Insights</h2>
+                <div class="h-48 bg-orange-100 rounded flex items-center justify-center text-orange-700">[Bar Chart Placeholder]</div>
+            </section>
+        </main>
+    </div>
+<script>
+    const buttons = document.querySelectorAll('.nav-btn');
+
+    buttons.forEach(button => {
+        button.addEventListener('click', function () {
+
+            // active color
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-orange-500');
+                btn.classList.add('bg-blue-500');
+            });
+
+            this.classList.remove('bg-blue-500');
+            this.classList.add('bg-orange-500');
+
+            // navigation
+            if (this.id === 'btnDashboard') {
+                window.location.href = '/';
+            }
+            
+            if (this.id === 'btnGateEntry') {
+                window.location.href = '/gate-entry';
+            }
+            
+        });
+    });
+
+    
+</script>
+<script src="{{ url_for('static', filename='javascript/main.js') }}"></script>
+
+</body>
+
+</html>
